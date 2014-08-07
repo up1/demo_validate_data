@@ -12,19 +12,12 @@ import demo.validate.refactor.EmailFormatRule;
 import demo.validate.refactor.NameEmptyRule;
 import demo.validate.refactor.NameFormatRule;
 import demo.validate.refactor.RegisterRule;
+import demo.validate.refactor.factory.RuleFactory;
 
 public class RegisterService {
 
 	public boolean register(User user) {
-		
-		List<RegisterRule> registerRules = new ArrayList<RegisterRule>();
-		registerRules.add(new NameEmptyRule());
-		registerRules.add(new NameFormatRule());
-		registerRules.add(new EmailEmptyRule());
-		registerRules.add(new EmailFormatRule());
-		registerRules.add(new EmailDomainRule());
-		registerRules.add(new AgeAllowRule());
-		for (RegisterRule registerRule : registerRules) {
+		for (RegisterRule registerRule : RuleFactory.getRegisterRules()) {
 			registerRule.validate(user);
 		}
 		
